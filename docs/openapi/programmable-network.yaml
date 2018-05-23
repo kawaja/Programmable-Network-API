@@ -237,7 +237,8 @@ components:
           example: "LC"
         cfa:
           description: >-
-            Customer Facility Assignment, or the reference ID for the physical port within the DC for interconnect
+            Customer Facility Assignment, or the reference ID for the
+            physical port within the DC for interconnect
           type: string
           example: "10GBase-LR SMF/LC"
         endpointuuid:
@@ -1528,7 +1529,7 @@ paths:
                     example: "My Endpoint"
                   status:
                     type: string
-                    example: "deployed"    
+                    example: "deployed"
     put:
       summary: Update Endpoint name
       tags:
@@ -1707,7 +1708,7 @@ paths:
         - contracts
       responses:
         '200':
-            $ref: '#/components/schemas/contractgetres'
+          $ref: '#/components/schemas/contractgetres'
     put:
       summary: Update active Contract by ContractID
       tags:
@@ -1889,7 +1890,7 @@ paths:
                   type: string
                   example: "9a04a7ff-0a82-4259-9f2b-c384b6d720ab"
                 vportvalue:
-                   $ref: '#/components/schemas/Vportvalue'
+                  $ref: '#/components/schemas/Vportvalue'
       responses:
         '200':
           description: Success
