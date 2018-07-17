@@ -22,7 +22,7 @@ info:
     url: 'https://dev.telstra.com/content/programmable-network-api'
     email: pnapi-support@team.telstra.com
 servers:
-  - url: 'https://penapi.pacnetconnect.com'
+  - url: 'https://penapi.pacnetconnect.com/1.0.0'
     description: Production Public API
 components:
   securitySchemes:
@@ -1979,7 +1979,7 @@ components:
 security:
   - oAuth2: []
 paths:
-  /1.0.0/inventory/datacenters:
+  /inventory/datacenters/:
     get:
       summary: Get list of all the data centers
       tags:
@@ -2003,7 +2003,7 @@ paths:
           $ref: '#/components/responses/validationerror'
         '500':
           $ref: '#/components/responses/internalerror'
-  '/1.0.0/inventory/endpoints/customeruuid/{customeruuid}':
+  /inventory/endpoints/customeruuid/{customeruuid}/:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
@@ -2013,7 +2013,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/endpointlistresponse'
-  '/1.0.0/inventory/endpoint/{endpointuuid}':
+  /inventory/endpoint/{endpointuuid}/:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     get:
@@ -2023,8 +2023,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/endpointresponse'
-
-  /1.0.0/inventory/vnfendpoint:
+  /inventory/vnfendpoint/:
     post:
       summary: Instantiate Virtual Network Function
       tags:
@@ -2038,10 +2037,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vnfendpointresponse'
-  '/eis/1.0.0/vnfendpoint/vnfuuid/{vnfuuid}':
+  /vnfendpoint/vnfuuid/{vnfuuid}/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      servers:
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0/
       summary: Get details of a specific VNF
       tags:
         - endpoints
@@ -2049,7 +2050,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vnfdetailresponse'
-  /1.0.0/inventory/regularendpoint:
+  /inventory/regularendpoint/:
     post:
       summary: Create Physical (Port) Endpoint
       tags:
@@ -2062,10 +2063,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/regendpointresponse'
-  '/eis/1.0.0/endpoints/{endpointuuid}/assign_topology_tag':
+  /endpoints/{endpointuuid}/assign_topology_tag/:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     post:
+      servers:
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0
       summary: Assign an Endpoint to a Topology
       tags:
         - endpoints
@@ -2078,11 +2081,13 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/assigntopotagresponse'
-  '/eis/1.0.0/endpoints/topology_tag_uuid/{topotaguuid}/endpoint/{endpointuuid}':
+  /endpoints/topology_tag_uuid/{topotaguuid}/endpoint/{endpointuuid}/:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
       - $ref: '#/components/parameters/endpointuuid'
     delete:
+      servers:
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0
       summary: Remove Endpoint from a Topology
       tags:
         - endpoints
@@ -2090,11 +2095,12 @@ paths:
       responses:
         '204':
           description: No Content
-
-  '/eis/1.0.0/endpoint/endpointuuid/{endpointuuid}':
+  /endpoint/endpointuuid/{endpointuuid}/:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0
       summary: Get Endpoint name and status
       tags:
         - endpoints
@@ -2102,6 +2108,8 @@ paths:
         '200':
           $ref: '#/components/responses/endpointstatusresponse'
     put:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0
       summary: Update Endpoint name
       tags:
         - endpoints
@@ -2115,7 +2123,7 @@ paths:
           $ref: '#/components/responses/endpointupdateresponse'
         '400':
           $ref: '#/components/responses/invalidrequest'
-  /1.0.0/inventory/link:
+  /inventory/link/:
     post:
       summary: Create Link and initial Contract
       tags:
@@ -2128,7 +2136,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/createlinkresponse'
-  '/1.0.0/inventory/links/customer/{customeruuid}':
+  /inventory/links/customer/{customeruuid}/:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
@@ -2138,7 +2146,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/activelinksresponse'
-  '/1.0.0/inventory/links/history/{linkid}':
+  /inventory/links/history/{linkid}/:
     parameters:
       - $ref: '#/components/parameters/linkid'
     get:
@@ -2148,7 +2156,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/linkhistoryresponse'
-  '/1.0.0/inventory/links/{linkid}/contract/{contractid}':
+  /inventory/links/{linkid}/contract/{contractid}/:
     parameters:
       - $ref: '#/components/parameters/linkid'
       - $ref: '#/components/parameters/contractid'
@@ -2174,7 +2182,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/updatecontractresponse'
-  '/1.0.0/inventory/links/{linkid}':
+  /inventory/links/{linkid}/:
     parameters:
       - $ref: '#/components/parameters/linkid'
     get:
@@ -2184,7 +2192,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/linkdetailresponse'
-  '/1.0.0/inventory/links/{linkid}/contract':
+  /inventory/links/{linkid}/contract/:
     parameters:
       - $ref: '#/components/parameters/linkid'
     post:
@@ -2199,7 +2207,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/createcontractresponse'
-  /1.0.0/inventory/vnf/vport:
+  /inventory/vnf/vport/:
     post:
       summary: Create VNF VPort
       tags:
@@ -2213,8 +2221,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vportresponse'
-
-  /1.0.0/inventory/regularvport:
+  /inventory/regularvport/:
     post:
       summary: Create VPort for physical endpoint
       description: Create VPort representing a VLAN on a Physical Ethernet Port
@@ -2229,7 +2236,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/regvportresponse'
-  '/1.0.0/inventory/vport/{vportuuid}':
+  /inventory/vport/{vportuuid}/:
     parameters:
       - $ref: '#/components/parameters/vportuuid'
     get:
@@ -2239,7 +2246,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vportdetailresponse'
-  /1.0.0/marketplace/image:
+  /marketplace/image/:
     get:
       summary: List images in the Marketplace
       tags:
@@ -2247,7 +2254,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/imageresponse'
-  '/1.0.0/marketplace/image/{imageid}/':
+  /marketplace/image/{imageid}/:
     parameters:
       - $ref: '#/components/parameters/imageid'
     get:
@@ -2258,7 +2265,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/imagedetailresponse'
-  /1.0.0/marketplace/image/my_images/:
+  /marketplace/image/my_images/:
     get:
       summary: List images in "My Images"
       description: Note that trailing / is required
@@ -2267,7 +2274,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/my_imagesresponse'
-  '/1.0.0/marketplace/image/{imageid}/add_to_my_images/':
+  /marketplace/image/{imageid}/add_to_my_images/:
     parameters:
       - $ref: '#/components/parameters/imageid'
     post:
@@ -2285,7 +2292,7 @@ paths:
           $ref: '#/components/responses/addimageresponse'
         '404':
           $ref: '#/components/responses/objectnotfound'
-  '/1.0.0/marketplace/image/{imageid}/remove_from_my_images/':
+  /marketplace/image/{imageid}/remove_from_my_images/:
     parameters:
       - $ref: '#/components/parameters/imageid'
     post:
@@ -2305,12 +2312,12 @@ paths:
           $ref: '#/components/responses/objectnotfound'
         '422':
           $ref: '#/components/responses/validationerror'
-
-
-  '/vnfds/1.0.0/vnf/{vnfuuid}/suspend':
+  /vnf/{vnfuuid}/suspend/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/vnfds/1.0.0
       summary: Suspend the specified VNF
       description: 'Note that body must be {}'
       tags:
@@ -2318,10 +2325,12 @@ paths:
       responses:
         '200':
           description: Success
-  '/vnfds/1.0.0/vnf/{vnfuuid}/resume':
+  /vnf/{vnfuuid}/resume/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/vnfds/1.0.0
       summary: Resume the specified VNF
       description: 'Note that body must be {}'
       tags:
@@ -2329,10 +2338,12 @@ paths:
       responses:
         '200':
           description: Success
-  '/vnfds/1.0.0/vnf/{vnfuuid}/reboot':
+  /vnf/{vnfuuid}/reboot/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/vnfds/1.0.0
       summary: Reboot the specified VNF
       description: reboot_type is 'warm' or 'cold'
       tags:
@@ -2347,10 +2358,12 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/invalidrequest'
-  '/vnfds/1.0.0/vnf/{vnfuuid}/':
+  /vnf/{vnfuuid}/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/vnfds/1.0.0
       summary: Get status information about the specified VNF
       description: >-
         'Possible return values:
@@ -2371,7 +2384,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vnfstatusresponse'
-  /1.0.0/exchange:
+  /exchange/:
     get:
       summary: List all Exchange providers, with POPs
       tags:
@@ -2379,7 +2392,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/exchangeresponse'
-  '/1.0.0/exchange/{exprovuuid}':
+  /exchange/{exprovuuid}/:
     parameters:
       - $ref: '#/components/parameters/exprovuuid'
     get:
@@ -2390,7 +2403,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/exprovresponse'
-  /1.0.0/visitcard:
+  /visitcard/:
     get:
       summary: Get list of Visit Cards
       tags:
@@ -2398,7 +2411,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/visitcardresponse'
-  '/1.0.0/visitcard/{visitcarduuid}':
+  /visitcard/{visitcarduuid}/:
     parameters:
       - $ref: '#/components/parameters/visitcarduuid'
     get:
@@ -2426,7 +2439,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/visitcardupdateresponse'
-  /1.0.0/account/profile/exchange:
+  /account/profile/exchange/:
     get:
       summary: Get the current account's Exchange profile
       tags:
@@ -2434,9 +2447,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/profileresponse'
-
-  /ttms/1.0.0/topology_tag:
+  /topology_tag/:
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: List all topology tags
       tags:
         - topologies
@@ -2444,6 +2458,8 @@ paths:
         '200':
           $ref: '#/components/responses/topotagresponse'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: Create a named topology tag
       tags:
         - topologies
@@ -2455,10 +2471,12 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/topotagcreateresponse'
-  '/ttms/1.0.0/topology_tag/{topotaguuid}/':
+  /topology_tag/{topotaguuid}/:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: Get information about the specified topology tag
       tags:
         - topologies
@@ -2466,6 +2484,8 @@ paths:
         '200':
           $ref: '#/components/responses/topotagdetailresponse'
     put:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: Update a topology tag's name and/or description
       tags:
         - topologies
@@ -2478,16 +2498,20 @@ paths:
         '200':
           $ref: '#/components/responses/topotagupdateresponse'
     delete:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: Delete a topology tag
       tags:
         - topologies
       responses:
         '204':
           description: No Content
-  '/ttms/1.0.0/topology_tag/{topotaguuid}/objects/':
+  /topology_tag/{topotaguuid}/objects/:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/ttms/1.0.0
       summary: List objects for Topology
       description: >-
         List all objects (Endpoints, Links, VPorts, etc.) associated with the
@@ -2497,10 +2521,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/topotagobjectsresponse'
-  '/eis/1.0.0/endpoints/topology_tag_uuid/{topotaguuid}':
+  /endpoints/topology_tag_uuid/{topotaguuid}/:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/eis/1.0.0
       summary: List Endpoints for Topology
       description: >-
         List all Endpoints associated with the topology tag.
@@ -2510,7 +2536,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/topotaglistresponse'
-  /1.0.0/auth/generatetoken:
+  /auth/generatetoken/:
     post:
       summary: Create an authentication token
       tags:
@@ -2556,7 +2582,7 @@ paths:
                     example: "a8856a1a4e25b23d86fa9ae2ffce3b63"
         '412':
           description: Provided authorization grant is invalid
-  /1.0.0/auth/validatetoken:
+  /auth/validatetoken/:
     get:
       summary: Validate authentication token
       description: >-
@@ -2567,9 +2593,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/validatetokenresponse'
-
-
-  '/1.0.0/account/{customeruuid}':
+  /account/{customeruuid}/:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
@@ -2582,7 +2606,7 @@ paths:
           $ref: '#/components/responses/customerdetailresponse'
         '401':   # should be 403 Forbidden
           $ref: '#/components/responses/forbidden'
-  '/1.0.0/account/{customeruuid}/user':
+  /account/{customeruuid}/user/:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
@@ -2594,8 +2618,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/userlistresponse'
-
-  '/1.0.0/inventory/links-stats/endpoint/{endpointuuid}/{startdate}/{enddate}':
+  /inventory/links-stats/endpoint/{endpointuuid}/{startdate}/{enddate}/:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
       - $ref: '#/components/parameters/startdate'
@@ -2609,7 +2632,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/linkstatsresponse'
-  '/1.0.0/inventory/links-stats/flow/{linkid}/{startdate}/{enddate}':
+  /inventory/links-stats/flow/{linkid}/{startdate}/{enddate}/:
     parameters:
       - $ref: '#/components/parameters/linkid'
       - $ref: '#/components/parameters/startdate'
@@ -2623,7 +2646,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/flowstatsresponse'
-  '/1.0.0/inventory/links-stats/endpointstate/{endpointuuid}/{startdate}/{enddate}':
+  /inventory/links-stats/endpointstate/{endpointuuid}/{startdate}/{enddate}/:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
       - $ref: '#/components/parameters/startdate'
@@ -2638,8 +2661,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/endpointstatestatsresponse'
-  /bms/1.0.0/backup:
+  /backup/:
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: Create backup of specified VNF
       description: >-
         'Note: if a second backup creation is attempted while one is
@@ -2656,10 +2681,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/backupresponse'
-  '/bms/1.0.0/backup/{backupuuid}':
+  /backup/{backupuuid}/:
     parameters:
       - $ref: '#/components/parameters/backupuuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: Get information about the specified backup
       tags:
         - vnfs
@@ -2667,16 +2694,20 @@ paths:
         '200':
           $ref: '#/components/responses/backupdetailresponse'
     delete:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: Delete specified backup
       tags:
         - vnfs
       responses:
         '200':
           $ref: '#/components/responses/backupdeleteresponse'
-  '/bms/1.0.0/backup/vnf/{vnfuuid}':
+  /backup/vnf/{vnfuuid}/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: List backups
       description: List available backups for the specified VNF
       tags:
@@ -2684,10 +2715,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/backuplistresponse'
-  '/bms/1.0.0/backup/vnf/{vnfuuid}/delete':
+  /backup/vnf/{vnfuuid}/delete/:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: Delete multiple backups
       description: Delete list of backups associated with specified VNF
       tags:
@@ -2695,10 +2728,12 @@ paths:
       responses:
         '202':
           $ref: '#/components/responses/backupmultideleteresponse'
-  '/bms/1.0.0/backup/{backupuuid}/restore':
+  /backup/{backupuuid}/restore/:
     parameters:
       - $ref: '#/components/parameters/backupuuid'
     post:
+      servers: 
+        - url: https://penapi.pacnetconnect.com/bms/1.0.0
       summary: Restore VNF from backup
       description: Restore VNF from specified backup
       tags:
