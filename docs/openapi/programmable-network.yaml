@@ -1979,8 +1979,9 @@ components:
 security:
   - oAuth2: []
 paths:
-  /1.0.0/inventory/datacenters:
+  '/1.0.0/inventory/datacenters':
     get:
+      operationId: inventory_datacentres
       summary: Get list of all the data centers
       tags:
         - datacentres
@@ -2007,6 +2008,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
+      operationId: inventory_endpoints_customeruuid
       summary: Get list of endpoints for a customer
       tags:
         - endpoints
@@ -2017,15 +2019,16 @@ paths:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     get:
+      operationId: inventory_endpoint
       summary: Get information about the specified endpoint
       tags:
         - endpoints
       responses:
         '200':
           $ref: '#/components/responses/endpointresponse'
-
-  /1.0.0/inventory/vnfendpoint:
+  '/1.0.0/inventory/vnfendpoint':
     post:
+      operationId: inventory_vnfendpoint
       summary: Instantiate Virtual Network Function
       tags:
         - endpoints
@@ -2042,6 +2045,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      operationId: vnfendpoint_vnfuuid
       summary: Get details of a specific VNF
       tags:
         - endpoints
@@ -2049,8 +2053,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vnfdetailresponse'
-  /1.0.0/inventory/regularendpoint:
+  '/1.0.0/inventory/regularendpoint':
     post:
+      operationId: inventory_regularendpoint
       summary: Create Physical (Port) Endpoint
       tags:
         - endpoints
@@ -2066,6 +2071,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     post:
+      operationId: endpoints_assign_topology_tag
       summary: Assign an Endpoint to a Topology
       tags:
         - endpoints
@@ -2083,6 +2089,7 @@ paths:
       - $ref: '#/components/parameters/topotaguuid'
       - $ref: '#/components/parameters/endpointuuid'
     delete:
+      operationId: endpoints_topology_tag_uuid_endpoint
       summary: Remove Endpoint from a Topology
       tags:
         - endpoints
@@ -2090,11 +2097,11 @@ paths:
       responses:
         '204':
           description: No Content
-
   '/eis/1.0.0/endpoint/endpointuuid/{endpointuuid}':
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
     get:
+      operationId: endpoint_endpointuuid_get
       summary: Get Endpoint name and status
       tags:
         - endpoints
@@ -2102,6 +2109,7 @@ paths:
         '200':
           $ref: '#/components/responses/endpointstatusresponse'
     put:
+      operationId: endpoint_endpointuuid_put
       summary: Update Endpoint name
       tags:
         - endpoints
@@ -2117,6 +2125,7 @@ paths:
           $ref: '#/components/responses/invalidrequest'
   /1.0.0/inventory/link:
     post:
+      operationId: inventory_link
       summary: Create Link and initial Contract
       tags:
         - links
@@ -2132,6 +2141,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
+      operationId: inventory_links_customer
       summary: Get active Links
       tags:
         - links
@@ -2142,6 +2152,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/linkid'
     get:
+      operationId: inventory_links_history
       summary: Get Link history
       tags:
         - links
@@ -2153,6 +2164,7 @@ paths:
       - $ref: '#/components/parameters/linkid'
       - $ref: '#/components/parameters/contractid'
     get:
+      operationId: inventory_links_contract_get
       summary: Get active Contract by ContractID
       tags:
         - contracts
@@ -2160,6 +2172,7 @@ paths:
         '200':
           $ref: '#/components/responses/activecontractresponse'
     put:
+      operationId: inventory_links_contract_put
       summary: Update active Contract by ContractID
       tags:
         - contracts
@@ -2178,6 +2191,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/linkid'
     get:
+      operationId: inventory_links
       summary: Get details of specified link
       tags:
         - links
@@ -2188,6 +2202,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/linkid'
     post:
+      operationId: inventory_links_contract
       summary: Create new Contract on specified link
       tags:
         - contracts
@@ -2199,8 +2214,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/createcontractresponse'
-  /1.0.0/inventory/vnf/vport:
+  '/1.0.0/inventory/vnf/vport':
     post:
+      operationId: inventory_vnf_vport
       summary: Create VNF VPort
       tags:
         - vports
@@ -2213,9 +2229,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/vportresponse'
-
-  /1.0.0/inventory/regularvport:
+  '/1.0.0/inventory/regularvport':
     post:
+      operationId: inventory_regularvport
       summary: Create VPort for physical endpoint
       description: Create VPort representing a VLAN on a Physical Ethernet Port
       tags:
@@ -2233,14 +2249,16 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vportuuid'
     get:
+      operationId: inventory_vport
       summary: Get information about the specified VPort
       tags:
         - vports
       responses:
         '200':
           $ref: '#/components/responses/vportdetailresponse'
-  /1.0.0/marketplace/image:
+  '/1.0.0/marketplace/image':
     get:
+      operationId: marketplace_image
       summary: List images in the Marketplace
       tags:
         - vnfs
@@ -2251,6 +2269,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/imageid'
     get:
+      operationId: marketplace_image_imageid
       summary: Get information about the specified image
       description: Note that trailing / is required
       tags:
@@ -2258,8 +2277,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/imagedetailresponse'
-  /1.0.0/marketplace/image/my_images/:
+  '/1.0.0/marketplace/image/my_images/':
     get:
+      operationId: marketplace_image_my_images
       summary: List images in "My Images"
       description: Note that trailing / is required
       tags:
@@ -2271,6 +2291,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/imageid'
     post:
+      operationId: marketplace_image_add
       summary: Add specified image to "My Images"
       description: 'Note that trailing / is required, body must be {}'
       tags:
@@ -2289,6 +2310,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/imageid'
     post:
+      operationId: marketplace_image_remove
       summary: Remove specified image from "My Images"
       description: 'Note that trailing / is required, body must be {}'
       tags:
@@ -2305,12 +2327,11 @@ paths:
           $ref: '#/components/responses/objectnotfound'
         '422':
           $ref: '#/components/responses/validationerror'
-
-
   '/vnfds/1.0.0/vnf/{vnfuuid}/suspend':
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      operationId: vnf_suspend
       summary: Suspend the specified VNF
       description: 'Note that body must be {}'
       tags:
@@ -2322,6 +2343,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      operationId: vnf_resume
       summary: Resume the specified VNF
       description: 'Note that body must be {}'
       tags:
@@ -2333,6 +2355,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      operationId: vnf_reboot
       summary: Reboot the specified VNF
       description: reboot_type is 'warm' or 'cold'
       tags:
@@ -2351,6 +2374,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      operationId: vnf
       summary: Get status information about the specified VNF
       description: >-
         'Possible return values:
@@ -2373,6 +2397,7 @@ paths:
           $ref: '#/components/responses/vnfstatusresponse'
   /1.0.0/exchange:
     get:
+      operationId: exchange
       summary: List all Exchange providers, with POPs
       tags:
         - exchange
@@ -2383,6 +2408,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/exprovuuid'
     get:
+      operationId: exchange_exprovuuid
       summary: Exchange provider details
       tags:
         - exchange
@@ -2390,8 +2416,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/exprovresponse'
-  /1.0.0/visitcard:
+  '/1.0.0/visitcard':
     get:
+      operationId: visitcard
       summary: Get list of Visit Cards
       tags:
         - exchange
@@ -2402,6 +2429,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/visitcarduuid'
     get:
+      operationId: visitcard_uuid_get
       summary: View details of the specified Visit Card
       tags:
         - exchange
@@ -2409,6 +2437,7 @@ paths:
         '200':
           $ref: '#/components/responses/visitcarddetailresponse'
     put:
+      operationId: visitcard_uuid_put
       summary: Update details of the specified Visit Card
       tags:
         - exchange
@@ -2426,17 +2455,18 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/visitcardupdateresponse'
-  /1.0.0/account/profile/exchange:
+  '/1.0.0/account/profile/exchange':
     get:
+      operationId: account_profile_exchange
       summary: Get the current account's Exchange profile
       tags:
         - exchange
       responses:
         '200':
           $ref: '#/components/responses/profileresponse'
-
   /ttms/1.0.0/topology_tag:
     get:
+      operationId: topology_tag_get
       summary: List all topology tags
       tags:
         - topologies
@@ -2444,6 +2474,7 @@ paths:
         '200':
           $ref: '#/components/responses/topotagresponse'
     post:
+      operationId: topology_tag_post
       summary: Create a named topology tag
       tags:
         - topologies
@@ -2459,6 +2490,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      operationId: topology_tag_uuid_get
       summary: Get information about the specified topology tag
       tags:
         - topologies
@@ -2466,6 +2498,7 @@ paths:
         '200':
           $ref: '#/components/responses/topotagdetailresponse'
     put:
+      operationId: topology_tag_uuid_put
       summary: Update a topology tag's name and/or description
       tags:
         - topologies
@@ -2478,6 +2511,7 @@ paths:
         '200':
           $ref: '#/components/responses/topotagupdateresponse'
     delete:
+      operationId: topology_tag_uuid_delete
       summary: Delete a topology tag
       tags:
         - topologies
@@ -2488,6 +2522,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      operationId: topology_tag_objects
       summary: List objects for Topology
       description: >-
         List all objects (Endpoints, Links, VPorts, etc.) associated with the
@@ -2501,6 +2536,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/topotaguuid'
     get:
+      operationId: endpoints_topology_tag_uuid
       summary: List Endpoints for Topology
       description: >-
         List all Endpoints associated with the topology tag.
@@ -2510,8 +2546,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/topotaglistresponse'
-  /1.0.0/auth/generatetoken:
+  '/1.0.0/auth/generatetoken':
     post:
+      operationId: generate_token
       summary: Create an authentication token
       tags:
         - authentication
@@ -2556,8 +2593,9 @@ paths:
                     example: "a8856a1a4e25b23d86fa9ae2ffce3b63"
         '412':
           description: Provided authorization grant is invalid
-  /1.0.0/auth/validatetoken:
+  '/1.0.0/auth/validatetoken':
     get:
+      operationId: validate_token
       summary: Validate authentication token
       description: >-
         Validate the authentication token and get information about the user
@@ -2567,12 +2605,11 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/validatetokenresponse'
-
-
   '/1.0.0/account/{customeruuid}':
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
+      operationId: account
       summary: Get account information details
       description: Get the account information for the specified customer
       tags:
@@ -2586,6 +2623,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/customeruuid'
     get:
+      operationId: account_user
       summary: List users
       description: List all users associated with the specified customer
       tags:
@@ -2594,13 +2632,13 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/userlistresponse'
-
   '/1.0.0/inventory/links-stats/endpoint/{endpointuuid}/{startdate}/{enddate}':
     parameters:
       - $ref: '#/components/parameters/endpointuuid'
       - $ref: '#/components/parameters/startdate'
       - $ref: '#/components/parameters/enddate'
     get:
+      operationId: inventory_links-stats_endpoint
       summary: Get statistics for endpoint
       description: Get statistics related to the specified endpoint
       tags:
@@ -2615,6 +2653,7 @@ paths:
       - $ref: '#/components/parameters/startdate'
       - $ref: '#/components/parameters/enddate'
     get:
+      operationId: inventory_links-stats_flow
       summary: Get statistics for flow
       description: Get statistics related to the specified flow
       tags:
@@ -2629,6 +2668,7 @@ paths:
       - $ref: '#/components/parameters/startdate'
       - $ref: '#/components/parameters/enddate'
     get:
+      operationId: inventory_links-stats_endpointstate
       summary: Get state statistics for endpoint
       description: >-
         Get statistics related to the state of the specified endpoint
@@ -2638,8 +2678,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/endpointstatestatsresponse'
-  /bms/1.0.0/backup:
+  '/bms/1.0.0/backup':
     post:
+      operationId: bms_backup
       summary: Create backup of specified VNF
       description: >-
         'Note: if a second backup creation is attempted while one is
@@ -2660,6 +2701,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/backupuuid'
     get:
+      operationId: bms_backup_get
       summary: Get information about the specified backup
       tags:
         - vnfs
@@ -2667,6 +2709,7 @@ paths:
         '200':
           $ref: '#/components/responses/backupdetailresponse'
     delete:
+      operationId: bms_backup_delete
       summary: Delete specified backup
       tags:
         - vnfs
@@ -2677,6 +2720,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     get:
+      operationId: bms_backup_vnf
       summary: List backups
       description: List available backups for the specified VNF
       tags:
@@ -2688,6 +2732,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/vnfuuid'
     post:
+      operationId: bms_backup_vnf_delete
       summary: Delete multiple backups
       description: Delete list of backups associated with specified VNF
       tags:
@@ -2699,6 +2744,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/backupuuid'
     post:
+      operationId: bms_backup_restore
       summary: Restore VNF from backup
       description: Restore VNF from specified backup
       tags:
